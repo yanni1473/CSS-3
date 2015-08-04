@@ -1,0 +1,42 @@
+如果你希望用户可自由定制四个角的半径，那么我们需要对上面代码做下改进。
+
+使用4个变量分别代表四个边角的半径大小：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+/* Mixin */
+.border-radius-custom (@topleft: 5px, @topright: 5px, @bottomleft: 5px, @bottomright: 5px) {
+    -webkit-border-radius: @topleft @topright @bottomright @bottomleft;
+    -moz-border-radius: @topleft @topright @bottomright @bottomleft;
+    border-radius: @topleft @topright @bottomright @bottomleft;
+}
+  
+/* Implementation */
+#somediv {
+    .border-radius-custom(20px, 20px, 0px, 0px);
+}
+编译后的 CSS
+
+?
+1
+2
+3
+4
+5
+6
+/* Compiled CSS */
+#somediv {
+  -webkit-border-radius: 20px 20px 0px 0px;
+  -moz-border-radius: 20px 20px 0px 0px;
+  border-radius: 20px 20px 0px 0px;
+}
