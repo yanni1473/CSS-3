@@ -1,0 +1,41 @@
+
+CSS3 的过渡使用起来更加麻烦，你必须最大化的支持各种浏览器，因此你需要定义 5 个前缀：
+
+/* Mixin */
+.transition (@prop: all, @time: 1s, @ease: linear) {
+    -webkit-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -moz-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -o-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -ms-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+}
+  
+/* Implementation */
+#somediv {
+    .transition(all, 0.5s, ease-in);
+} 
+  
+#somediv:hover {
+    opacity: 0;
+}
+
+
+
+转换后的 CSS 代码：
+
+/* Compiled CSS*/
+#somediv {
+  -webkit-transition: all 0.5s ease-in;
+  -moz-transition: all 0.5s ease-in;
+  -o-transition: all 0.5s ease-in;
+  -ms-transition: all 0.5s ease-in;
+  transition: all 0.5s ease-in;
+}
+  
+#somediv:hover {
+  opacity: 0;
+}
+
+
+
+
