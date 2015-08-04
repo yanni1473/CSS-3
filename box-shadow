@@ -1,0 +1,31 @@
+
+
+另外一个 CSS3 经常用到的属性是 box-shadow，该属性也有不同浏览器的前缀要求，而使用 LESS 的话可以这样：
+
+/* Mixin */
+.box-shadow (@x: 0px, @y: 3px, @blur: 5px, @alpha: 0.5) {
+    -webkit-box-shadow: <a href="http://my.oschina.net/xman" target="_blank" rel="nofollow">@x</a> <a href="http://my.oschina.net/895555" target="_blank" rel="nofollow">@y</a> <a href="http://my.oschina.net/u/129473" target="_blank" rel="nofollow">@blur</a> rgba(0, 0, 0, @alpha);
+    -moz-box-shadow: <a href="http://my.oschina.net/xman" target="_blank" rel="nofollow">@x</a> <a href="http://my.oschina.net/895555" target="_blank" rel="nofollow">@y</a> <a href="http://my.oschina.net/u/129473" target="_blank" rel="nofollow">@blur</a> rgba(0, 0, 0, @alpha);
+    box-shadow: <a href="http://my.oschina.net/xman" target="_blank" rel="nofollow">@x</a> <a href="http://my.oschina.net/895555" target="_blank" rel="nofollow">@y</a> <a href="http://my.oschina.net/u/129473" target="_blank" rel="nofollow">@blur</a> rgba(0, 0, 0, @alpha);
+}
+  
+/* Implementation */
+#somediv {
+    .box-shadow(5px, 5px, 6px, 0.3);
+}
+
+
+生成的 CSS：
+?
+1
+2
+3
+4
+5
+6
+/* Compiled CSS */
+#somediv {
+  -webkit-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+  -moz-box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+  box-shadow: 5px 5px 6px rgba(0, 0, 0, 0.3);
+}
