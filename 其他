@@ -1,0 +1,226 @@
+6. 线性渐变 Linear Gradient
+
+
+
+我们还是从最简单的开始，实现两个不同颜色之间的渐变，你可以定义开始颜色和最终颜色，这里我们使用最新的渐变语法，浏览器的支持情况请看这里。
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+/* Mixin */
+.gradient (@origin: left, @start: #ffffff, @stop: #000000) {
+    background-color: @start;
+    background-image: -webkit-linear-gradient(@origin, @start, @stop);
+    background-image: -moz-linear-gradient(@origin, @start, @stop);
+    background-image: -o-linear-gradient(@origin, @start, @stop);
+    background-image: -ms-linear-gradient(@origin, @start, @stop);
+    background-image: linear-gradient(@origin, @start, @stop);
+}
+  
+/* Implementation */
+#someDiv {
+    .gradient(left, #663333, #333333);
+}
+
+
+生成的 CSS
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+/* Compiled CSS */
+#someDiv {
+  background-color: #663333;
+  background-image: -webkit-linear-gradient(left, #663333, #333333);
+  background-image: -moz-linear-gradient(left, #663333, #333333);
+  background-image: -o-linear-gradient(left, #663333, #333333);
+  background-image: -ms-linear-gradient(left, #663333, #333333);
+  background-image: linear-gradient(left, #663333, #333333);
+}
+
+/* Mixin */
+.transition (@prop: all, @time: 1s, @ease: linear) {
+    -webkit-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -moz-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -o-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    -ms-transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+    transition: @prop <a href="http://my.oschina.net/u/126678" target="_blank" rel="nofollow">@time</a> @ease;
+}
+7. 快速渐变 Quick Gradient
+
+创建渐变最讨厌的事情之一就是找出你的颜色。有时你只是想快速在现有颜色上做一些渐变效果。
+
+这里我们使用从透明开始到全黑的渐变效果，你需要设置的就是最初颜色已经透明度 alpha 值：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+/* Mixin */
+.quick-gradient (@origin: left, @alpha: 0.2) {
+    background-image: -webkit-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -moz-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -o-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: -ms-linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+    background-image: linear-gradient(@origin, rgba(0,0,0,0.0), rgba(0,0,0,@alpha));
+}
+  
+/* Implementation */
+#somediv {
+    background-color: BADA55;
+    .quick-gradient(top, 0.2);
+}
+生成的 CSS：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+/* Compiled CSS */
+#somediv {
+  background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -moz-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -o-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: -ms-linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+  background-image: linear-gradient(top, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.2));
+}
+. 镜像效果 Webkit Reflection
+
+
+
+CSS3 中的镜像效果在浏览器都是普遍支持的。你需要做的就是设置长度和不透明度这两个参数，很简单：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+/* Mixin */
+.reflect (@length: 50%, @opacity: 0.2){
+    -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(@length, transparent), to(rgba(255,255,255,@opacity)));
+}
+  
+/* Implementation */
+#somediv {
+    .reflect(20%, 0.2);
+}
+9. 互补色方案 Complementary Color Scheme
+
+
+
+这里我们使用一个基本色，然后通过彩色旋转以及加亮和变暗方法扩展到5个不同色板。为了生成互补色，我们使用 spin 将颜色旋转 180 度：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+/* Mixin */
+@base: #663333;
+@complement1: spin(@base, 180);
+@complement2: darken(spin(@base, 180), 5%);
+@lighten1: lighten(@base, 15%);
+@lighten2: lighten(@base, 30%);
+  
+/* Implementation */
+.one   {color: @base;}
+.two   {color: @complement1;}
+.three {color: @complement2;}
+.four  {color: @lighten1;}
+.five  {color: @lighten2;}
+生成的 CSS：
+
+?
+1
+2
+3
+4
+5
+6
+/* Compiled CSS */
+.one   {color: #663333;}
+.two   {color: #336666;}
+.three {color: #2b5555;}
+.four  {color: #994d4d;}
+.five  {color: #bb7777;}
+10. 颜色微调 Subtle Color Scheme
+
+
+
+互补色很有用，但在网页设计中另外一个更有用的就是颜色微调：
+
+?
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+/* Mixin */
+@base: #663333;
+@lighter1: lighten(spin(@base, 5), 10%);
+@lighter2: lighten(spin(@base, 10), 20%);
+@darker1: darken(spin(@base, -5), 10%);
+@darker2: darken(spin(@base, -10), 20%);
+  
+/* Implementation */
+.one   {color: @base;}
+.two   {color: @lighter1;}
+.three {color: @lighter2;}
+.four  {color: @darker1;}
+.five  {color: @darker2;}
+
